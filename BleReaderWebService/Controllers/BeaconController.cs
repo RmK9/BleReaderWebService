@@ -53,8 +53,7 @@ namespace BleReaderWebService.Controllers
         }
 
         [HttpPost]
-        [Route("rest/1.0/beacon/{beaconName}/{beaconAddress}/{beaconServiceId}/{beaconTxPowerLevel}/{beaconScanDateTime}/{buildingName}")]
-        public object SetNewBeacon(string beaconName, string beaconAddress, int? beaconServiceId, int? beaconTxPowerLevel, DateTime? beaconScanDateTime, string buildingName)
+        public object AddNewBeacon(string beaconName, string beaconAddress, int? beaconServiceId, int? beaconTxPowerLevel, DateTime? beaconScanDateTime, string buildingName)
         {
             var failure = new { Error = "Failed to add new Beacon with the provided data" };
 
