@@ -36,11 +36,11 @@ namespace BleReaderWebService
                 new { controller = "Beacon", action = "GetByBuildingName", buildingName = "" }
             );
 
-            config.Routes.MapHttpRoute(
-                "AddNewBeacon",
-                "rest/1.0/beacon/{beaconName}/{beaconAddress}/{beaconServiceId}/{beaconTxPowerLevel}/{beaconScanDateTime}/{buildingName}",
-                new { controller = "Beacon", action = "AddNewBeacon", beaconName = "", beaconAddress = "", beaconServiceId = "", beaconTxPowerLevel = "", beaconScanDateTime = "", buildingName = "" }
-            );
+            //config.Routes.MapHttpRoute(
+            //    "AddNewBeacon",
+            //    "rest/1.0/beacon/{beaconName}/{beaconAddress}/{beaconServiceId}/{beaconTxPowerLevel}/{beaconScanDateTime}/{buildingName}",
+            //    new { controller = "Beacon", action = "AddNewBeacon", beaconName = "", beaconAddress = "", beaconServiceId = "", beaconTxPowerLevel = "", beaconScanDateTime = "", buildingName = "" }
+            //);
         }
     }
 }

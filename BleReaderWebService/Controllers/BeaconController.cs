@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -53,11 +54,23 @@ namespace BleReaderWebService.Controllers
         }
 
         [HttpPost]
-        public object AddNewBeacon(string beaconName, string beaconAddress, int? beaconServiceId, int? beaconTxPowerLevel, DateTime? beaconScanDateTime, string buildingName)
+        [Route("rest/1.0/beacon")]
+        public object AddNewBeacon(string beaconName, string beaconAddress, int? beaconServiceId, int? beaconTxPowerLevel, string beaconScanDateTimeString, string buildingName)
         {
             var failure = new { Error = "Failed to add new Beacon with the provided data" };
 
             if (beaconName.IsNullOrWhiteSpace() || beaconAddress.IsNullOrWhiteSpace() || buildingName.IsNullOrWhiteSpace()) return failure;
+
+            DateTime beaconScanDateTime;
+
+            try
+            {
+                beaconScanDateTime = DateTime.ParseExact(beaconScanDateTimeString, "yyyy-MM-dd HH-mm-ss", CultureInfo.InvariantCulture);
+            }
+            catch (Exception e)
+            {
+                beaconScanDateTime = DateTime.Now;
+            }
 
             var beacon = new Beacon
             {
@@ -65,7 +78,7 @@ namespace BleReaderWebService.Controllers
                 BeaconAddress = beaconAddress,
                 BeaconServiceId = beaconServiceId,
                 BeaconTxPowerLevel = beaconTxPowerLevel,
-                BeaconScanDateTime = beaconScanDateTime??DateTime.Now,
+                BeaconScanDateTime = beaconScanDateTime,
                 BuildingName = buildingName
             };
 
