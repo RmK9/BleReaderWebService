@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 
 namespace BleReaderWebService
@@ -9,16 +8,34 @@ namespace BleReaderWebService
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings
+                .Add(new RequestHeaderMapping("Accept",
+                    "text/html",
+                    StringComparison.InvariantCultureIgnoreCase,
+                    true,
+                    "application/json"));
 
             // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                "GetAllBeaconData",
+                "rest/1.0/beacons",
+                new { controller = "Beacon", action = "GetAllBeacons" }
             );
+
+            config.Routes.MapHttpRoute(
+                "GetBeaconDataById",
+                "rest/1.0/beacons/beacon-id/{beaconId}",
+                new { controller = "Beacon", action = "GetByBeaconId", beaconId = "" }
+            );
+
+            config.Routes.MapHttpRoute(
+                "GetBeaconDataByBuildingName",
+                "rest/1.0/beacons/building-name/{buildingName}",
+                new { controller = "Beacon", action = "GetByBuildingName", buildingName = "" }
+            );
+
         }
     }
 }

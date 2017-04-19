@@ -1,24 +1,79 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+﻿@{
+    ViewBag.Title = "Web API Routes";
+}
+
+<header class="help-page">
+    <div class="content-wrapper">
+        <div class="float-left">
+            <h1>@ViewBag.Title</h1>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
+</header>
+<div id="body" class="help-page">
+    <section class="featured">
+        <div class="content-wrapper">
+            <h2>Introduction</h2>
+            <p>
+                Use this page to see the available BLE Reader's Web API
+            </p>
+        </div>
+    </section>
+    <section class="content-wrapper main-content clear-fix">
+        <h2 id="Beacon">Beacon</h2>
+        <table class="help-page-table">
+            <thead>
+            <tr><th>API</th><th>Description</th><th>Example</th></tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="api-name">
+                    <a href="/rest/1.0/beacons" target="_blank">GET &nbsp;rest/1.0/beacons</a>
+                </td>
+                <td class="api-documentation">
+                    <p>Returns JSON of all the beacons available in the Database</p>
+                </td>
+                <td>
+                    <a href="/rest/1.0/beacons" target="_blank">Link</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="api-name">
+                    <a href="/rest/1.0/beacons/beacon-id/{beaconId}" target="_blank">GET &nbsp;rest/1.0/beacons/beacon-id/{beaconId}</a>
+                </td>
+                <td class="api-documentation">
+                    <p>Returns JSON of the found beacon by the specified {beaconId}</p>
+                </td>
+                <td>
+                    <a href="/rest/1.0/beacons/beacon-id/1" target="_blank">Link</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="api-name">
+                    <a href="/rest/1.0/beacons/building-name/{buildingName}" target="_blank">GET &nbsp;rest/1.0/beacons/building-name/{buildingName}</a>
+                </td>
+                <td class="api-documentation">
+                    <p>Returns JSON of all the beacons found by the specified {buildingName}</p>
+                </td>
+                <td>
+                    <a href="/rest/1.0/beacons/building-name/Headland%20Court" target="_blank">Link</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="api-name">
+                    <a href="/rest/1.0/beacon/" target="_blank">POST &nbsp;rest/1.0/beacon/</a>
+                </td>
+                <td class="api-documentation">
+                    <p>Adds a new Beacon to the Database. Returns HTTP Status Code 200 - OK if successful, 400 - Bad Request if failed</p>
+                </td>
+                <td>
+                    <b>Submit using POST</b>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <br/>
 </div>
