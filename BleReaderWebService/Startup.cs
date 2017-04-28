@@ -1,4 +1,6 @@
-﻿using Owin;
+﻿using Microsoft.AspNet.SignalR;
+using Microsoft.Owin.Cors;
+using Owin;
 
 namespace BleReaderWebService
 {
@@ -6,7 +8,13 @@ namespace BleReaderWebService
     {
         public void Configuration(IAppBuilder app)
         {
-            app.MapSignalR();
+            //app.MapSignalR();
+            app.Map("/signalr", map =>
+            {
+                map.UseCors(CorsOptions.AllowAll);
+                var hubConfiguration = new HubConfiguration { };
+                map.RunSignalR(hubConfiguration);
+            });
         }
     }
 }

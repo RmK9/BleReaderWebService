@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Results;
+using BleReaderWebService.Hubs;
 using Microsoft.Ajax.Utilities;
 using BleReaderWebService.Services;
+using Microsoft.AspNet.SignalR;
 
 namespace BleReaderWebService.Controllers
 {
@@ -21,6 +23,10 @@ namespace BleReaderWebService.Controllers
             var beacons = _beaconsDbContext.Beacons.ToList();
 
             if (!beacons.Any()) return notFound;
+
+            var notifier = GlobalHost.ConnectionManager.GetHubContext<BeaconHub>();
+
+            notifier.Clients.All.newBeaconScanned("OnePlus 3", "2");
 
             return beacons;
         }

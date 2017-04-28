@@ -9,5 +9,10 @@ namespace BleReaderWebService.Hubs
             // Call the addNewMessageToPage method to update clients.
             Clients.All.addNewMessageToPage(name, message);
         }
+
+        public void NotifyNewBeacon(string name, string number)
+        {
+            Clients.All.newBeaconScanned(name, number);
+        }
     }
 }

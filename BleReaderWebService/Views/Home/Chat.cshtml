@@ -10,6 +10,10 @@
     <ul id="discussion"></ul>
 </div>
 
+<div id="new-beacon">
+    
+</div>
+
 @section scripts {
     @*<!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
@@ -28,19 +32,24 @@
                 $('#discussion').append('<li><strong>' + htmlEncode(name)
                     + '</strong>: ' + htmlEncode(message) + '</li>');
             };
+
+            beacon.client.newBeaconScanned = function(name, number) {
+                $("#new-beacon").append("<strong>New beacon has been scanned</strong><p>Name: <strong>" + name + "</strong></p><p>Number: <strong>" + number + "</strong></p><hr>");
+            };
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(prompt('Enter your name:', ''));
             // Set initial focus to message input box.
             $('#message').focus();
             // Start the connection.
             $.connection.hub.start().done(function () {
-                debugger;
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
                     beacon.server.send($('#displayname').val(), $('#message').val());
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
                 });
+
+
             });
         });
         // This optional function html-encodes messages for display in the page.
