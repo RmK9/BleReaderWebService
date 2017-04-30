@@ -61,7 +61,7 @@ namespace BleReaderWebService.Controllers
 
         [HttpPost]
         [Route("rest/1.0/beacon")]
-        public object AddNewBeacon(string beaconName, string beaconAddress, int? beaconServiceId, int? beaconTxPowerLevel, string beaconScanDateTimeString, string buildingName)
+        public object AddNewBeacon(string beaconName, string beaconAddress, int? beaconServiceId, int? beaconTxPowerLevel, string beaconScanDateTimeString, string buildingName, string imeiNumber)
         {
             var failure = new { Error = "Failed to add new Beacon with the provided data" };
 
@@ -85,7 +85,29 @@ namespace BleReaderWebService.Controllers
                 BeaconServiceId = beaconServiceId,
                 BeaconTxPowerLevel = beaconTxPowerLevel,
                 BeaconScanDateTime = beaconScanDateTime,
-                BuildingName = buildingName
+                BuildingName = buildingName,
+                ImeiNumber = imeiNumber
+            };
+
+            _beaconsDbContext.Beacons.Add(beacon);
+            _beaconsDbContext.SaveChanges();
+
+            return new StatusCodeResult(HttpStatusCode.OK, this);
+        }
+
+        [HttpPost]
+        [Route("rest/1.0/beacon-generate")]
+        public object AddGeneratedBeacon()
+        {
+            var beacon = new Beacon
+            {
+                BeaconName = "Auto-Generated",
+                BeaconAddress = "00:00:00:00:00",
+                BeaconServiceId = new Random().Next(0, 10),
+                BeaconTxPowerLevel = -10,
+                BeaconScanDateTime = DateTime.Now,
+                BuildingName = "SIWB N533",
+                ImeiNumber = "111111111111"
             };
 
             _beaconsDbContext.Beacons.Add(beacon);
