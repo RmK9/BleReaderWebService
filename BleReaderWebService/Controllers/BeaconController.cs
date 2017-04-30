@@ -92,6 +92,10 @@ namespace BleReaderWebService.Controllers
             _beaconsDbContext.Beacons.Add(beacon);
             _beaconsDbContext.SaveChanges();
 
+            var notifier = GlobalHost.ConnectionManager.GetHubContext<BeaconHub>();
+
+            notifier.Clients.All.newBeaconScanned(beacon.BeaconName, beacon.ImeiNumber);
+
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
 
@@ -112,6 +116,10 @@ namespace BleReaderWebService.Controllers
 
             _beaconsDbContext.Beacons.Add(beacon);
             _beaconsDbContext.SaveChanges();
+
+            var notifier = GlobalHost.ConnectionManager.GetHubContext<BeaconHub>();
+
+            notifier.Clients.All.newBeaconScanned(beacon.BeaconName, beacon.ImeiNumber);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
