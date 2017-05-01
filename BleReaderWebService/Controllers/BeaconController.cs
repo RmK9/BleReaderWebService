@@ -90,7 +90,7 @@ namespace BleReaderWebService.Controllers
 
             var notifier = GlobalHost.ConnectionManager.GetHubContext<BeaconHub>();
 
-            notifier.Clients.All.newBeaconScanned(beacon.ImeiNumber, beacon.ImeiNumber);
+            notifier.Clients.All.newBeaconScanned(beacon.ImeiNumber, beacon.BeaconServiceId);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
@@ -115,7 +115,7 @@ namespace BleReaderWebService.Controllers
 
             var notifier = GlobalHost.ConnectionManager.GetHubContext<BeaconHub>();
 
-            notifier.Clients.All.newBeaconScanned(beacon.ImeiNumber, beacon.ImeiNumber);
+            notifier.Clients.All.newBeaconScanned(beacon.ImeiNumber, beacon.BeaconServiceId);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
