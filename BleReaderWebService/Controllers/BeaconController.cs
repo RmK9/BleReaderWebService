@@ -24,10 +24,6 @@ namespace BleReaderWebService.Controllers
 
             if (!beacons.Any()) return notFound;
 
-            var notifier = GlobalHost.ConnectionManager.GetHubContext<BeaconHub>();
-
-            notifier.Clients.All.newBeaconScanned("OnePlus 3", "2");
-
             return beacons;
         }
 
@@ -94,7 +90,7 @@ namespace BleReaderWebService.Controllers
 
             var notifier = GlobalHost.ConnectionManager.GetHubContext<BeaconHub>();
 
-            notifier.Clients.All.newBeaconScanned(beacon.BeaconName, beacon.ImeiNumber);
+            notifier.Clients.All.newBeaconScanned(beacon.ImeiNumber, beacon.ImeiNumber);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
@@ -119,7 +115,7 @@ namespace BleReaderWebService.Controllers
 
             var notifier = GlobalHost.ConnectionManager.GetHubContext<BeaconHub>();
 
-            notifier.Clients.All.newBeaconScanned(beacon.BeaconName, beacon.ImeiNumber);
+            notifier.Clients.All.newBeaconScanned(beacon.ImeiNumber, beacon.ImeiNumber);
 
             return new StatusCodeResult(HttpStatusCode.OK, this);
         }
